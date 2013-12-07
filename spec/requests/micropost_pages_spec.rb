@@ -42,4 +42,17 @@ describe "Micropost pages" do
       end
     end
   end
+
+ describe "micropost destruction" do
+    let(:other_user) { FactoryGirl.create(:user) }
+    before { micropost = FactoryGirl.create(:micropost, user: other_user) }
+
+    describe "as incorrect user" do
+      before { visit root_path }
+
+      it "should not have a delete link" do
+        expect(page).not_to have_link('delete')
+      end
+    end
+  end
 end
